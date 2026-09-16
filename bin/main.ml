@@ -42,7 +42,8 @@ let rec getInputNumber () =
 (*****************************)
 
 
-(**Pet record that stores [name], [fullness], [happiness], and [energy]*)
+(**Pet record that stores [name], [fullness], [happiness], and [energy]. Each 
+value must remain between 0 and 100 inclusive. *)
 type pet = {
   name : string;
   fullness : int;
@@ -97,9 +98,9 @@ let feed pet =
   print_endline "You feed your pet \n";
   {
     name = pet.name;
-    fullness = clamp0To100 pet.fullness + 25;
-    happiness = clamp0To100 pet.happiness + 5;
-    energy = clamp0To100 pet.energy - 5;
+    fullness = clamp0To100 (pet.fullness + 25);
+    happiness = clamp0To100 (pet.happiness + 5);
+    energy = clamp0To100 (pet.energy - 5);
   }
 
     (** Takes in parameter [pet] : pet, and creates then returns a new pet 
@@ -109,9 +110,9 @@ let play pet =
   print_endline "You play with your pet \n";
   {
     name = pet.name;
-    fullness = clamp0To100 pet.fullness - 10;
-    happiness = clamp0To100 pet.happiness + 20;
-    energy = clamp0To100 pet.energy - 15;
+    fullness = clamp0To100 (pet.fullness - 10);
+    happiness = clamp0To100 (pet.happiness + 20);
+    energy = clamp0To100 (pet.energy - 15);
   }
 
     (** Takes in parameter [pet] : pet, and creates then returns a new pet 
@@ -121,9 +122,9 @@ let nap pet =
   print_endline "Your pet naps \n";
   {
     name = pet.name;
-    fullness = clamp0To100 pet.fullness - 10;
-    happiness = clamp0To100 pet.happiness - 5;
-    energy = clamp0To100 pet.energy + 25;
+    fullness = clamp0To100 (pet.fullness - 10);
+    happiness = clamp0To100 (pet.happiness - 5);
+    energy = clamp0To100 (pet.energy + 25);
   }
 
     (** Takes in parameter [pet] : pet, and creates then returns a new pet 
@@ -133,9 +134,9 @@ let chinScratch pet =
   print_endline "You scratch your pet's chin\n";
   {
     name = pet.name;
-    fullness = clamp0To100 pet.fullness - 15;
-    happiness = clamp0To100 pet.happiness + 30;
-    energy = clamp0To100 pet.energy - 25;
+    fullness = clamp0To100 (pet.fullness - 15);
+    happiness = clamp0To100 (pet.happiness + 30);
+    energy = clamp0To100 (pet.energy - 25);
   }
 
   (**Takes in parameters [eventNum] : int and [userPet] : pet. Pre-condition: 
@@ -181,7 +182,7 @@ let randomEvent eventNum userPet =
     (*execcution should never reach this path*)
   else userPet
 
-  (**Prints a list of options. No paramters or pre-conditions. *)
+  (**Prints a list of options. No pre-conditions. *)
 let printOptions () =
   print_endline
     "\n\
@@ -223,7 +224,7 @@ let endDay pet =
     print_endline "your pet is neglected horribly, and vanishes away from you";
   exit 0
 
-  
+
 let () = print_endline "Title: Pet Project \n"
 let () = print_endline "Welcome, your pet is a cat, because I like cats"
 let () = print_endline "Please enter your cat's name [text]: \n"
